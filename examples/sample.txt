@@ -1,0 +1,2 @@
+This is a sample file
+Count the total words and number of lines

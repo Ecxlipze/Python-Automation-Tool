@@ -1,0 +1,15 @@
+tasks:
+  - task_name: Write demo log
+    task_type: log
+    schedule:
+      type: interval
+      minutes: 1
+    file_path: examples/watch_folder
+    message: "The scheduled log task is working."
+
+  - task_name: Count sample file
+    task_type: file
+    schedule:
+      type: interval
+      minutes: 1
+    file_path: examples/sample.txt
