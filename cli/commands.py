@@ -1,0 +1,14 @@
+import argparse
+
+
+def get_args():
+    parser = argparse.ArgumentParser(description="Python automation tool")
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    start_command = subparsers.add_parser("start")
+    start_command.add_argument("--config", required=False)
+
+    subparsers.add_parser("stop")
+    subparsers.add_parser("status")
+
+    return parser.parse_args()
