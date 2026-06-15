@@ -8,6 +8,7 @@ from scheduler.task_scheduler import start_scheduler
 from tasks.file_processing_task import FileProcessingTask
 from tasks.log_task import LogTask
 from utils.logger import setup_logger
+from tasks.email_task import EmailTask
 
 STOP_FILE = Path("logs/stop.txt")
 
@@ -76,6 +77,9 @@ def main():
             stop_app()
         elif args.command == "status":
             show_status()
+        elif task_config["task_type"] == "email":
+            tasks.append(EmailTask(task_config))
+    
     except Exception as error:
         print(f"Error: {error}", file=sys.stderr)
         sys.exit(1)

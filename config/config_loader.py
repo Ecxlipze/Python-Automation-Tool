@@ -27,3 +27,5 @@ def check_config(config):
             raise ValueError(f"Unknown task type: {task['task_type']}")
         if task["schedule"]["type"] not in ["interval", "daily"]:
             raise ValueError("Schedule type must be interval or daily")
+        if task["task_type"] not in ["log", "file", "email"]:
+            raise ValueError(f"Unknown task type: {task['task_type']}")
