@@ -3,6 +3,7 @@ import time
 from pathlib import Path
 from cli.commands import get_args
 from config.config_loader import check_config, load_config
+from scheduler.file_watcher import start_file_watcher
 from scheduler.task_scheduler import start_scheduler
 from tasks.file_processing_task import FileProcessingTask
 from tasks.log_task import LogTask
@@ -35,6 +36,7 @@ def start_app(config_file):
     check_config(config)
     tasks = make_tasks(config)
     stop_event, scheduler_thread = start_scheduler(tasks)
+    observer = start_file_watcher(tasks)
 
     print("App is running. Press Ctrl+C to stop.")
     try:
@@ -44,6 +46,8 @@ def start_app(config_file):
         print("Stopping from Ctrl+C...")
     finally:
         stop_event.set()
+        observer.stop()
+        observer.join()
         scheduler_thread.join()
         if STOP_FILE.exists():
             STOP_FILE.unlink()
