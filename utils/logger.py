@@ -13,7 +13,6 @@ def setup_logger():
         maxBytes=1000000,
         backupCount=3,
     )
-
     console_handler = logging.StreamHandler()
     formatter = logging.Formatter(
         "%(asctime)s | %(levelname)s | %(message)s",
