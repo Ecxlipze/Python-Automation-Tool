@@ -6,7 +6,7 @@ def get_args():
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     start_command = subparsers.add_parser("start")
-    start_command.add_argument("--config", required=False)
+    start_command.add_argument("--config", required=True)
 
     list_command = subparsers.add_parser("list")
     list_command.add_argument("--config", required=True)
