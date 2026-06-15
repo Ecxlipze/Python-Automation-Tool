@@ -13,11 +13,15 @@ STOP_FILE = Path("logs/stop.txt")
 
 def make_tasks(config):
     tasks = []
+
     for task_config in config["tasks"]:
         if task_config["task_type"] == "log":
             tasks.append(LogTask(task_config))
         elif task_config["task_type"] == "file":
             tasks.append(FileProcessingTask(task_config))
+        elif task_config["task_type"] == "email":
+            tasks.append(EmailTask(task_config))
+
     return tasks
 
 def list_tasks(config_file):
@@ -76,9 +80,14 @@ def main():
             stop_app()
         elif args.command == "status":
             show_status()
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
     except Exception as error:
         print(f"Error: {error}", file=sys.stderr)
         sys.exit(1)
+        
 
 if __name__ == "__main__":
     main()
