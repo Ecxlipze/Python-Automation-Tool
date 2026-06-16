@@ -5,6 +5,7 @@ from cli.commands import get_args
 from config.config_loader import check_config, load_config
 from scheduler.file_watcher import start_file_watcher
 from scheduler.task_scheduler import start_scheduler
+from tasks.email_task import EmailTask
 from tasks.file_processing_task import FileProcessingTask
 from tasks.log_task import LogTask
 from utils.logger import setup_logger
@@ -80,14 +81,10 @@ def main():
             stop_app()
         elif args.command == "status":
             show_status()
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     except Exception as error:
         print(f"Error: {error}", file=sys.stderr)
         sys.exit(1)
-        
+    
 
 if __name__ == "__main__":
     main()
