@@ -10,11 +10,8 @@ from tasks.file_processing_task import FileProcessingTask
 from tasks.log_task import LogTask
 from utils.logger import setup_logger
 
-STOP_FILE = Path("logs/stop.txt")
-
 def make_tasks(config):
     tasks = []
-
     for task_config in config["tasks"]:
         if task_config["task_type"] == "log":
             tasks.append(LogTask(task_config))
@@ -22,7 +19,6 @@ def make_tasks(config):
             tasks.append(FileProcessingTask(task_config))
         elif task_config["task_type"] == "email":
             tasks.append(EmailTask(task_config))
-
     return tasks
 
 def list_tasks(config_file):
@@ -32,17 +28,17 @@ def list_tasks(config_file):
     for task in config["tasks"]:
         print(f"- {task['task_name']} ({task['task_type']})")
 
+STOP_FILE = Path("logs/stop.txt")
+
 def start_app(config_file):
     setup_logger()
     if STOP_FILE.exists():
         STOP_FILE.unlink()
-
     config = load_config(config_file)
     check_config(config)
     tasks = make_tasks(config)
     stop_event, scheduler_thread = start_scheduler(tasks)
     observer = start_file_watcher(tasks)
-
     print("App is running. Press Ctrl+C to stop.")
     try:
         while not STOP_FILE.exists():
@@ -54,15 +50,15 @@ def start_app(config_file):
         observer.stop()
         observer.join()
         scheduler_thread.join()
+
         if STOP_FILE.exists():
             STOP_FILE.unlink()
         print("App stopped.")
-
 def stop_app():
     Path("logs").mkdir(exist_ok=True)
     STOP_FILE.write_text("stop")
     print("Stop requested. The running app will stop shortly.")
-
+    
 def show_status():
     if STOP_FILE.exists():
         print("Status: stop requested.")
@@ -83,8 +79,7 @@ def main():
             show_status()
     except Exception as error:
         print(f"Error: {error}", file=sys.stderr)
-        sys.exit(1)
-        
+        sys.exit(1)    
 
 if __name__ == "__main__":
     main()

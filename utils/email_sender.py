@@ -14,6 +14,7 @@ def send_email(subject, body):
 
     if not sender:
         sender = "dry-run@example.com"
+
     if not receiver:
         receiver = "student@example.com"
 
@@ -34,4 +35,5 @@ def send_email(subject, body):
         smtp.login(username, password)
         smtp.send_message(message)
 
+    logging.info("Email sent to %s", receiver)
     logging.info("Email sent to %s", receiver)
