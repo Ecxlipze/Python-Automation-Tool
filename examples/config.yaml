@@ -13,3 +13,12 @@ tasks:
       type: interval
       minutes: 1
     file_path: examples/sample.txt
+
+  - task_name: Email dry run
+    task_type: email
+    schedule:
+      type: daily
+      time: "09:00"
+    file_path: examples/watch_folder
+    subject: "Automation Tool"
+    body: "This email is prepared by Python Automation Tool"
