@@ -7,4 +7,3 @@ class EmailTask(BaseTask):
         subject = self.config.get("subject", "Python Automation Tool")
         body = self.config.get("body", "This is a test email from the automation tool.")
         send_email(subject, body)
-        send_email(subject, body)

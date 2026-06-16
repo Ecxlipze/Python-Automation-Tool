@@ -2,6 +2,9 @@ import logging
 import os
 import smtplib
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def send_email(subject, body):
@@ -35,5 +38,4 @@ def send_email(subject, body):
         smtp.login(username, password)
         smtp.send_message(message)
 
-    logging.info("Email sent to %s", receiver)
     logging.info("Email sent to %s", receiver)
