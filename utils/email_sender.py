@@ -36,3 +36,4 @@ def send_email(subject, body):
         smtp.send_message(message)
 
     logging.info("Email sent to %s", receiver)
+    logging.info("Email sent to %s", receiver)
